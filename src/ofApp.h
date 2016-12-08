@@ -9,7 +9,7 @@
 //#define HOST "192.168.0.116"
 //#include <fstream>
 
-#define TABS 10
+#define TABS 12
 #include "ofButton.h"
 #include "ofTable.h"
 #include "ofxFontStash.h"
