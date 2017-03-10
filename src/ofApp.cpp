@@ -2,7 +2,14 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-   //REMEMBER
+
+    ofxXmlSettings config;
+    config.load("config.xml");
+    config.pushTag("config");
+    TABS = config.getValue("Num_tables", 0);
+    secondAct = config.getValue("act_number", 0)==1?false:true;
+    cout << TABS<< endl;
+    cout << secondAct << endl;
     
   //  ofSetDataPathRoot("../Resources/data/");
     
@@ -247,11 +254,11 @@ void ofApp::update(){
                    
                    else if (m.getAddress()==tablenames[i]+retardnames[u]){
                       //2 if(m.getArgTypeName(0)=="float")
-                           buttons[i*6+u].x=m.getArgAsFloat(0)/127;
+                           buttons[i*6+u].x=(127-m.getArgAsFloat(0))/127;
                       // if(m.getArgType(1)==1)
                            buttons[i*6+u].y=(127-m.getArgAsFloat(1))/127;
                       // if(m.getArgType(2)==1)
-                           buttons[i*6+u].rot=m.getArgAsFloat(2);
+                           buttons[i*6+u].rot=2*PI-m.getArgAsFloat(2);
                        
                        //cout<<msg->getArgAsFloat(0)<<endl;
                        //cout<<msg->getArgAsInt32(0)<<endl;

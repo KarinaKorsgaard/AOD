@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E14A52F5F74BE93A1E54FC411D5EC49B67F747DD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9B774B0323186B2BCB6A3C5ECEB04025E7DCF467" : 0,
+    "E14A52F5F74BE93A1E54FC411D5EC49B67F747DD" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AE168504-7666-4DF1-AAA5-A516A29842AD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9B774B0323186B2BCB6A3C5ECEB04025E7DCF467" : "addons\/ofxFontStash",
+    "E14A52F5F74BE93A1E54FC411D5EC49B67F747DD" : "AOD"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "AOD",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "AOD.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jeonghopark\/ofxFontStash.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9B774B0323186B2BCB6A3C5ECEB04025E7DCF467"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/KarinaKorsgaard\/AOD.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E14A52F5F74BE93A1E54FC411D5EC49B67F747DD"
+    }
+  ]
+}

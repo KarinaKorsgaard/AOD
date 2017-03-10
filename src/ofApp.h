@@ -9,7 +9,7 @@
 //#define HOST "192.168.0.116"
 //#include <fstream>
 
-#define TABS 12
+
 #include "ofButton.h"
 #include "ofTable.h"
 #include "ofxFontStash.h"
@@ -20,7 +20,7 @@
 class ofApp : public ofBaseApp{
 
 	public:
-    
+    int TABS;
    // 280*legendScale
 		void setup();
 		void update();
@@ -178,5 +178,5 @@ class ofApp : public ofBaseApp{
     int xadjust = 0;
     int yafjust = 0;
     
-    bool secondAct = false;
+    bool secondAct;
 };
