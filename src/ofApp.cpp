@@ -4,10 +4,11 @@
 void ofApp::setup(){
 
     ofxXmlSettings config;
-    config.load("config.xml");
+    config.load("_config.xml");
     config.pushTag("config");
     TABS = config.getValue("Num_tables", 0);
-    secondAct = config.getValue("act_number", 0)==1?false:true;
+    secondAct = false;
+    //secondAct = config.getValue("act_number", 0)==1?false:true;
     reverseX = config.getValue("reverseX", 0)==0?false:true;
     reverseY = config.getValue("reverseY", 0)==0?false:true;
     reverseAngle = config.getValue("reverseAngle", 0)==0?false:true;

@@ -1,7 +1,0 @@
-<config>
-    <Num_tables>12</Num_tables>
-    <act_number>1</act_number>
-    <reverseX>1</reverseX> <!--0 means no reverse, 1 means reverse-->
-    <reverseY>1</reverseY>
-    <reverseAngle>1</reverseAngle>
-</config>
