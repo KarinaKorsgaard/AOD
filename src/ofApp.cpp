@@ -8,6 +8,9 @@ void ofApp::setup(){
     config.pushTag("config");
     TABS = config.getValue("Num_tables", 0);
     secondAct = false;
+    
+    BUTTONS = TABS*6;
+    
     //secondAct = config.getValue("act_number", 0)==1?false:true;
     reverseX = config.getValue("reverseX", 0)==0?false:true;
     reverseY = config.getValue("reverseY", 0)==0?false:true;
@@ -20,7 +23,7 @@ void ofApp::setup(){
     ofSetWindowPosition(3760, -30);
    // sender.setup(HOST, SENDTO);
     receiver.setup(PORT);
-    ofSetFrameRate(30);
+   // ofSetFrameRate(30);
     fontSize = 40;
    
    // thread.startThread(); /////////////
@@ -120,7 +123,7 @@ void ofApp::setup(){
     ofDirectory coinDir;
     coinDir.allowExt("png");
     coinDir.listDir(path);
-    
+    cout << "coin dir" + ofToString(coinDir.size())<<endl;
     for(int i = 0; i<coinDir.size();i++){
         ofImage img;
         flip.push_back(img);
@@ -185,6 +188,8 @@ void ofApp::setup(){
 //            buttons[i].maxy = ofToFloat(minmaxConfig[i*4+3]);
 //        }
 //    }
+   // scene = 1;
+    startScene = true;
 }
 
 //--------------------------------------------------------------
@@ -218,7 +223,7 @@ void ofApp::update(){
             showAnswer = false;
             theTimer = 0;
             spermStageTwo = true;
-            startScene = false;
+            //startScene = false;
             theAnswer ="";
          //   showText = true;
         }
@@ -258,9 +263,9 @@ void ofApp::update(){
                    
                    else if (m.getAddress()==tablenames[i]+retardnames[u]){
                       //2 if(m.getArgTypeName(0)=="float")
-                       float x = reverseX ? (127-m.getArgAsFloat(0))/127 : (m.getArgAsFloat(0))/127;
-                       float y = reverseY ? (127-m.getArgAsFloat(0))/127 : (m.getArgAsFloat(0))/127;
-                       float r = reverseAngle ? (127-m.getArgAsFloat(0))/127 : (m.getArgAsFloat(0))/127;
+                       float x = reverseX ? (127.-m.getArgAsFloat(0))/127. : (m.getArgAsFloat(0))/127.;
+                       float y = reverseY ? (127.-m.getArgAsFloat(1))/127. : (m.getArgAsFloat(1))/127.;
+                       float r = reverseAngle ? 2*PI-m.getArgAsFloat(2) : m.getArgAsFloat(2);
                            buttons[i*6+u].x=x;
                       // if(m.getArgType(1)==1)
                            buttons[i*6+u].y=y;
@@ -369,7 +374,15 @@ void ofApp::draw(){
    // theAnswer= "";
     
     if(scene==0){
-        
+//        for(int i = 0; i<buttons.size();i++){
+//            ofPushMatrix();
+//            ofTranslate(buttons[i].x*ofGetWidth(), buttons[i].y*ofGetHeight());
+//            ofRotateZ(ofRadToDeg(buttons[i].rot));
+//            int red = buttons[i].onOff ? 255:0;
+//            ofSetColor(red, 0, 255-red);
+//            ofDrawRectangle(0, 0, 20, 20);
+//            ofPopMatrix();
+//        }
         stageOne = false;
        
             ofSetColor(255);
@@ -1941,52 +1954,52 @@ void ofApp::spermRace(){
         
         tableList();
         
-        for(int i = 0; i<BUTTONS;i++){
+        for(int i = 0; i<buttons.size();i++){
             //     buttons[i].rotation+=ofRandom(1);
             //     buttons[i].onOff = true;
             //     buttons[i].haveBeenOn = true;
             
-            ofButton b = buttons[i];
-            if(b.onOff){
+            ofButton *b = &buttons[i];
+            if(b->onOff){
                 
-                if(b.rotation>=maxSize){
-                    b.rotation=maxSize;
+                if(b->rotation>=maxSize){
+                    b->rotation=maxSize;
                 }
                 
                 //stop the first loosers
-                if(b.rotation+b.radius>maxSize-outerRim && b.spermRace && b.haveBeenCounted){
+                if(b->rotation+b->radius>maxSize-outerRim && b->spermRace && b->haveBeenCounted){
                     
                     // girls
-                    if(b.xyint==2 && b.haveBeenCounted){
-                        b.haveBeenCounted = false;
+                    if(b->xyint==2 && b->haveBeenCounted){
+                        b->haveBeenCounted = false;
                         specialSit.push_back(0);
                         cout <<specialSit.size()<<endl;
                     }
                     
                     // stopping girls if only girls have won.
-                    if(specialSit.size()<TABS||b.xyint==1){
+                    if(specialSit.size()<TABS||b->xyint==1){
                         
-                        b.minRotation = maxSize-(outerRim-20);
+                        b->minRotation = maxSize-(outerRim-20);
                         for(int u = 0; u<BUTTONS;u++){
-                            if(buttons[u].spermRace && i!=u && b.table == buttons[u].table && buttons[u].spermRace){
+                            if(buttons[u].spermRace && i!=u && b->table == buttons[u].table && buttons[u].spermRace){
                                 buttons[u].spermRotFreeze = buttons[u].rotation;
                                 buttons[u].spermRace = false;
                                 buttons[u].spermRace2 = false;
-                                spermTables.push_back(b.table);
+                                spermTables.push_back(b->table);
                             }
                         }
                     }
                     
-                    if(specialSit.size()>12&&b.xyint==2){
-                        b.spermRotFreeze = buttons[i].rotation;
-                        b.spermRace = false;
-                        b.spermRace2 = false;
+                    if(specialSit.size()>12&&b->xyint==2){
+                        b->spermRotFreeze = buttons[i].rotation;
+                        b->spermRace = false;
+                        b->spermRace2 = false;
                         //b.haveBeenCounted = false;
                     }
                 }
                 
                 //stop the second loosers
-                if(b.rotation+b.radius>maxSize-innerEgg && b.xyint==1 && b.spermRace){
+                if(b->rotation+b->radius>maxSize-innerEgg && b->xyint==1 && b->spermRace){
                     
                     spermStageTwo=false;
                     for(int j = 0; j<BUTTONS;j++){
@@ -2002,24 +2015,24 @@ void ofApp::spermRace(){
                 
                 
                 
-                if(b.rotation+b.radius>maxSize-innerEgg && b.xyint==2 && b.spermRace){
-                    b.spermRace = false;
-                    b.spermRotFreeze = b.rotation;
+                if(b->rotation+b->radius>maxSize-innerEgg && b->xyint==2 && b->spermRace){
+                    b->spermRace = false;
+                    b->spermRotFreeze = b->rotation;
                 }
                 
-                if(b.spermRace&&buttons[i].spermRace2&&b.rotation+b.radius>maxSize-innerEgg){
-                    b.rotation+=2;
-                    if(b.rotation>maxSize-10){
+                if(b->spermRace&&buttons[i].spermRace2&&b->rotation+b->radius>maxSize-innerEgg){
+                    b->rotation+=2;
+                    if(b->rotation>maxSize-10){
                         lockResults=true;
-                        theAnswer = buttons[i].letter+ofToString(b.table+1) +"="+ b.xy+"x";
+                        theAnswer = buttons[i].letter+ofToString(b->table+1) +"="+ b->xy+"x";
                     }
                 }
                 
-                if(TABS==10)degree = (b.table*36)+(b.ID*(30/6) + 3);
-                else degree = (b.table*30)+(b.ID*(27/6) );
+                if(TABS==10)degree = (b->table*36)+(b->ID*(30/6) + 3);
+                else degree = (b->table*30)+(b->ID*(27/6) );
                 degree = ofDegToRad(degree);
-                
-                if(!b.spermRace||!b.spermRace2){
+              //  cout << degree << endl;
+                if(!b->spermRace||!b->spermRace2){
                     lenght =(maxSize-buttons[i].spermRotFreeze);
                     posX = cos(degree)*lenght;
                     posY = sin(degree)*lenght;
@@ -2028,7 +2041,7 @@ void ofApp::spermRace(){
                 }
                 
                 
-                if(b.spermRace && b.spermRace2){
+                if(b->spermRace && b->spermRace2){
                     
                     lenght =(maxSize-buttons[i].rotation);
                     posX = cos(degree)*(maxSize-buttons[i].rotation);
@@ -2057,19 +2070,19 @@ void ofApp::spermRace(){
                 ofSetLineWidth(5);
                 ofFill();
                 
-                ofDrawCircle(0, 0, b.radius);
+                ofDrawCircle(0, 0, b->radius);
                 
                 for(int u = 0; u<10;u++){
                     
-                    float de = 0.1*((u-5)*(b.tailWiggle-0.5));
-                    ofDrawCircle((cos(degree+de)*(b.radius+3*u)), sin(degree+de)* (b.radius+3*u), (10-u)/2);
+                    float de = 0.1*((u-5)*(b->tailWiggle-0.5));
+                    ofDrawCircle((cos(degree+de)*(b->radius+3*u)), sin(degree+de)* (b->radius+3*u), (10-u)/2);
                     
                 }
                 ofSetColor(0,195,0);
                 font.draw(ofToString(buttons[i].letter), 26, -13, +8);
                 font.draw(buttons[i].xy, 26,0, +8);
                 ofPopMatrix();
-                buttons[i]=b;
+              //  buttons[i]=*b;
             }
         }
         
@@ -2229,9 +2242,9 @@ void ofApp::sceneCalculate(){
     
     currentSum=0;
 
-    for(auto b : buttons)b.answer=int(ofMap(b.rot, 0, 2*PI, 10, 0));
     
     for(int i = 0 ; i<BUTTONS;i++){
+        buttons[i].answer = int(ofMap(buttons[i].rot, 0, 2*PI, 10, 0));
         if(buttons[i].onOff){
             ofPushMatrix();
             
