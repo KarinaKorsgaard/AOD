@@ -179,4 +179,5 @@ class ofApp : public ofBaseApp{
     int yafjust = 0;
     
     bool secondAct;
+    bool reverseX,reverseY,reverseAngle;
 };
